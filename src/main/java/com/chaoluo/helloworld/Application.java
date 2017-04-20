@@ -1,26 +1,26 @@
 package com.chaoluo.helloworld;
 
-import org.springframework.boot.*;
-import org.springframework.boot.autoconfigure.*;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-@RestController
+@Controller
 @EnableAutoConfiguration
-//@Import({ com.WebSecurityConfig.class })
-@ComponentScan("com")
 public class Application {
 
-    @PreAuthorize("hasAnyRole('ADMIN')")
-    @RequestMapping("/")
-    String home() {
-        return "Hello World!";
+    @RequestMapping(value = "/resources", method = RequestMethod.GET)
+    @ResponseBody
+    String getResources() {
+        return "Get Resources";
     }
 
-    @RequestMapping("/foo")
-    String foo() {
-        return "Foo, Hello World!";
+    @RequestMapping(value = "/resources", method = RequestMethod.POST, consumes = {"application/json"})
+    @ResponseBody
+    String postResources() {
+        return "Post Resources!";
     }
 
     public static void main(String[] args) throws Exception {
