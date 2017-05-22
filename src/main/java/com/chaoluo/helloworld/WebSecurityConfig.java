@@ -25,9 +25,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http
                 .authorizeRequests()
-                .antMatchers("/foo/").hasRole("ADMIN")
-                .anyRequest().denyAll()
-                .and().httpBasic().realmName(REALM).authenticationEntryPoint(getBasicAuthEntryPoint());
+                    .antMatchers("/foo").hasRole("ADMIN")
+                    .anyRequest().authenticated().and()
+                .httpBasic().realmName(REALM).authenticationEntryPoint(getBasicAuthEntryPoint());
     }
 
 
